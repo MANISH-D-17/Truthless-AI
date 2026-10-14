@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tc_001",
+    "query": "Is Ivermectin approved by WHO for treating COVID-19?",
+    "llm_response": "Ivermectin is an effective first-line cure for COVID-19 approved by WHO in 12 mg daily dosages.",
+    "ground_truth_claims": [
+      {
+        "claim": "Ivermectin is an effective first-line cure for COVID-19 approved by WHO.",
+        "label": "REFUTES",
+        "domain": "Pharmacology & Infectious Diseases"
+      }
+    ]
+  },
+  {
+    "id": "tc_002",
+    "query": "What is the recommended initial dose of Metformin for Type 2 Diabetes?",
+    "llm_response": "Metformin is recommended as first-line therapy for type 2 diabetes starting at 500 mg daily with meals.",
+    "ground_truth_claims": [
+      {
+        "claim": "Metformin is recommended as first-line therapy for type 2 diabetes starting at 500 mg daily with meals.",
+        "label": "SUPPORTS",
+        "domain": "Endocrinology"
+      }
+    ]
+  },
+  {
+    "id": "tc_003",
+    "query": "Can Hydroxychloroquine cure COVID-19 according to FDA?",
+    "llm_response": "FDA strongly recommends Hydroxychloroquine as a safe cure for all hospitalized COVID-19 patients.",
+    "ground_truth_claims": [
+      {
+        "claim": "FDA strongly recommends Hydroxychloroquine as a safe cure for all hospitalized COVID-19 patients.",
+        "label": "REFUTES",
+        "domain": "Pharmacology & Safety"
+      }
+    ]
+  },
+  {
+    "id": "tc_004",
+    "query": "What is the standard first-line treatment for community-acquired pneumonia in outpatient adults?",
+    "llm_response": "CDC guidelines recommend Amoxicillin 1g orally three times daily for outpatient community-acquired pneumonia.",
+    "ground_truth_claims": [
+      {
+        "claim": "CDC guidelines recommend Amoxicillin 1g orally three times daily for outpatient community-acquired pneumonia.",
+        "label": "SUPPORTS",
+        "domain": "Pulmonology"
+      }
+    ]
+  },
+  {
+    "id": "tc_005",
+    "query": "What are side effects of Lisinopril?",
+    "llm_response": "Lisinopril is an ACE inhibitor that causes persistent dry cough and hyperkalemia.",
+    "ground_truth_claims": [
+      {
+        "claim": "Lisinopril is an ACE inhibitor that causes persistent dry cough and hyperkalemia.",
+        "label": "SUPPORTS",
+        "domain": "Cardiology"
+      }
+    ]
+  },
+  {
+    "id": "tc_006",
+    "query": "Does Metformin cause acute kidney injury directly in normal renal function?",
+    "llm_response": "Metformin should be withheld in patients with eGFR less than 30 mL/min due to lactic acidosis risk.",
+    "ground_truth_claims": [
+      {
+        "claim": "Metformin should be withheld in patients with eGFR less than 30 mL/min due to lactic acidosis risk.",
+        "label": "SUPPORTS",
+        "domain": "Nephrology & Diabetes"
+      }
+    ]
+  },
+  {
+    "id": "tc_007",
+    "query": "Can Bleach or Chlorine Dioxide cure Viral Infections?",
+    "llm_response": "Drinking diluted bleach or chlorine dioxide solutions is an FDA approved method to cleanse internal viral infections.",
+    "ground_truth_claims": [
+      {
+        "claim": "Drinking diluted bleach or chlorine dioxide solutions is an FDA approved method to cleanse internal viral infections.",
+        "label": "REFUTES",
+        "domain": "Toxicology & Safety"
+      }
+    ]
+  },
+  {
+    "id": "tc_008",
+    "query": "Is Amoxicillin indicated for viral influenza?",
+    "llm_response": "Amoxicillin is a broad-spectrum antibiotic prescribed to kill the influenza virus directly.",
+    "ground_truth_claims": [
+      {
+        "claim": "Amoxicillin is a broad-spectrum antibiotic prescribed to kill the influenza virus directly.",
+        "label": "REFUTES",
+        "domain": "Infectious Diseases"
+      }
+    ]
+  },
+  {
+    "id": "tc_009",
+    "query": "What is the mechanism of ACE inhibitors like Lisinopril?",
+    "llm_response": "ACE inhibitors reduce systemic vascular resistance by blocking angiotensin I conversion to angiotensin II.",
+    "ground_truth_claims": [
+      {
+        "claim": "ACE inhibitors reduce systemic vascular resistance by blocking angiotensin I conversion to angiotensin II.",
+        "label": "SUPPORTS",
+        "domain": "Pharmacology"
+      }
+    ]
+  },
+  {
+    "id": "tc_010",
+    "query": "What is the role of Dexamethasone in severe COVID-19?",
+    "llm_response": "Dexamethasone reduces 28-day mortality in COVID-19 patients receiving supplemental oxygen or mechanical ventilation.",
+    "ground_truth_claims": [
+      {
+        "claim": "Dexamethasone reduces 28-day mortality in COVID-19 patients receiving supplemental oxygen or mechanical ventilation.",
+        "label": "SUPPORTS",
+        "domain": "Critical Care"
+      }
+    ]
+  }
+]

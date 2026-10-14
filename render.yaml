@@ -1,0 +1,29 @@
+services:
+  # 1. Backend Web Service (FastAPI + ChromaDB)
+  - type: web
+    name: healthcare-verifier-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: CHROMADB_DIR
+        value: ./data/chroma_db
+      - key: DATABASE_NAME
+        value: healthcare_verifier_db
+      - key: MONGODB_URL
+        value: mongodb+srv://demo:demo@cluster.mongodb.net/healthcare_verifier_db
+
+  # 2. Frontend Web Service (React Static Site)
+  - type: web
+    name: healthcare-verifier-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    rootDir: frontend
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
