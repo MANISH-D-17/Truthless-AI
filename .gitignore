@@ -36,3 +36,5 @@ yarn-error.log*
 # Vector Database & Local Data
 backend/data/chroma_db/
 .env
+.vercel
+.env*
