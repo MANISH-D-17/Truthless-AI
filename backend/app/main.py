@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import os
+import re
 
 from app.core.config import settings
 from app.core.database import connect_to_mongo, close_mongo_connection
@@ -21,6 +22,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def normalize_path_middleware(request: Request, call_next):
+    path = request.scope.get("path", "")
+    if "//" in path:
+        request.scope["path"] = re.sub(r"/+", "/", path)
+    if request.scope.get("path") == "/verify":
+        request.scope["path"] = f"{settings.API_V1_STR}/verify"
+    return await call_next(request)
 
 @app.on_event("startup")
 async def startup_event():
