@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/v1/:path*",
-      "destination": "https://healthcare-verifier-backend.onrender.com/api/v1/:path*"
+      "destination": "https://truthless-ai.onrender.com/api/v1/:path*"
     },
     {
       "source": "/(.*)",
