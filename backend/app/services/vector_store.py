@@ -44,15 +44,13 @@ class HealthcareVectorStore:
             self.initialized = False
 
     def search_evidence(self, claim_text: str, top_k: int = 3) -> List[Dict[str, Any]]:
-        self.initialize()
-        
-        if self.initialized and self.collection and self.collection.count() > 0:
-            try:
+        try:
+            self.initialize()
+            if self.initialized and self.collection:
                 results = self.collection.query(
                     query_texts=[claim_text],
                     n_results=top_k
                 )
-                
                 evidences = []
                 if results and "documents" in results and results["documents"]:
                     docs = results["documents"][0]
@@ -69,9 +67,10 @@ class HealthcareVectorStore:
                             "similarity_score": round(similarity, 4),
                             "evidence_level": meta.get("evidence_level", "High (Peer-Reviewed)")
                         })
-                return evidences
-            except Exception as e:
-                print(f"ChromaDB query error: {e}")
+                if evidences:
+                    return evidences
+        except Exception as e:
+            print(f"ChromaDB search notice (using fallback): {e}")
 
         # Fallback knowledge retriever if ChromaDB is empty or building
         return self._fallback_evidence_retrieval(claim_text)

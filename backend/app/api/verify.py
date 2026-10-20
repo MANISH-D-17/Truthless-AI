@@ -138,12 +138,13 @@ async def verify_llm_response(payload: ClaimVerificationRequest):
     )
 
     # Step 8: Persist to MongoDB Audit Log
-    db_conn = await get_database()
-    if db_conn is not None:
-        try:
-            await db_conn["verification_reports"].insert_one(response_payload.dict())
-        except Exception as e:
-            print(f"MongoDB persistence notice: {e}")
+    try:
+        db_conn = await get_database()
+        if db_conn is not None:
+            data = response_payload.model_dump() if hasattr(response_payload, "model_dump") else response_payload.dict()
+            await db_conn["verification_reports"].insert_one(data)
+    except Exception as e:
+        print(f"MongoDB persistence notice: {e}")
 
     return response_payload
 

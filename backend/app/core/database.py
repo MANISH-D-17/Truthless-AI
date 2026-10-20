@@ -7,7 +7,12 @@ class Database:
 db = Database()
 
 async def get_database():
-    return db.client[settings.DATABASE_NAME]
+    if db.client is not None:
+        try:
+            return db.client[settings.DATABASE_NAME]
+        except Exception:
+            return None
+    return None
 
 async def connect_to_mongo():
     db.client = AsyncIOMotorClient(settings.MONGODB_URL)
