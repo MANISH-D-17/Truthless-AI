@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || '/api/v1';
+const rawBase = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || '/api/v1';
+const cleanBase = rawBase.replace(/\/+$/, '');
+const API_BASE = cleanBase.endsWith('/api/v1') ? cleanBase : (cleanBase === '' ? '/api/v1' : `${cleanBase}/api/v1`);
 
 export const verifyResponse = async (query, llm_response, llm_model = 'Llama-3-8B-Instruct') => {
   try {

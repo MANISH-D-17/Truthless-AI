@@ -30,15 +30,17 @@ class BioBERTMedicalNER:
 
     def _lazy_init(self):
         if not self.initialized:
-            try:
-                from transformers import pipeline
-                self.pipeline = pipeline("ner", model=settings.BIOBERT_NER_MODEL, aggregation_strategy="simple")
-                self.initialized = True
-                print(f"Loaded BioBERT NER Model: {settings.BIOBERT_NER_MODEL}")
-            except Exception as e:
-                print(f"Warning: Could not load BioBERT model ({e}). Using dictionary rule-based NER engine.")
-                self.pipeline = None
-                self.initialized = True
+            if settings.ENABLE_HEAVY_TRANSFORMERS:
+                try:
+                    from transformers import pipeline
+                    self.pipeline = pipeline("ner", model=settings.BIOBERT_NER_MODEL, aggregation_strategy="simple")
+                    self.initialized = True
+                    print(f"Loaded BioBERT NER Model: {settings.BIOBERT_NER_MODEL}")
+                    return
+                except Exception as e:
+                    print(f"Notice: Using dictionary rule-based NER engine ({e}).")
+            self.pipeline = None
+            self.initialized = True
 
     def extract_entities(self, text: str) -> List[Dict[str, Any]]:
         self._lazy_init()

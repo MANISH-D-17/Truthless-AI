@@ -15,15 +15,17 @@ class FactVerificationEngine:
 
     def _lazy_init(self):
         if not self.initialized:
-            try:
-                from transformers import pipeline
-                self.nli_pipeline = pipeline("text-classification", model=settings.NLI_MODEL_NAME, return_all_scores=True)
-                self.initialized = True
-                print(f"Loaded NLI Model: {settings.NLI_MODEL_NAME}")
-            except Exception as e:
-                print(f"NLI HuggingFace pipeline warning ({e}). Using semantic polarity verification engine.")
-                self.nli_pipeline = None
-                self.initialized = True
+            if settings.ENABLE_HEAVY_TRANSFORMERS:
+                try:
+                    from transformers import pipeline
+                    self.nli_pipeline = pipeline("text-classification", model=settings.NLI_MODEL_NAME, return_all_scores=True)
+                    self.initialized = True
+                    print(f"Loaded NLI Model: {settings.NLI_MODEL_NAME}")
+                    return
+                except Exception as e:
+                    print(f"Notice: Using semantic polarity verification engine ({e}).")
+            self.nli_pipeline = None
+            self.initialized = True
 
     def verify_claim_against_evidences(self, claim: str, evidences: List[Dict[str, Any]]) -> Dict[str, Any]:
         self._lazy_init()

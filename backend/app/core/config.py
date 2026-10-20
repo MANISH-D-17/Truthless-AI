@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     # NLI & NER Model Settings
     NLI_MODEL_NAME: str = os.getenv("NLI_MODEL_NAME", "cross-encoder/nli-deberta-v3-small")
     BIOBERT_NER_MODEL: str = os.getenv("BIOBERT_NER_MODEL", "dslim/bert-base-NER")
+    ENABLE_HEAVY_TRANSFORMERS: bool = os.getenv("ENABLE_HEAVY_TRANSFORMERS", "false").lower() in ("true", "1")
     
     # JWT Security Settings
     SECRET_KEY: str = os.getenv("SECRET_KEY", "SUPER_SECRET_HEALTHCARE_AI_VERIFICATION_KEY_2026")

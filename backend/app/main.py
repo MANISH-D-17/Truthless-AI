@@ -40,6 +40,11 @@ app.include_router(verify.router, prefix=settings.API_V1_STR)
 app.include_router(knowledge.router, prefix=settings.API_V1_STR)
 app.include_router(analytics.router, prefix=settings.API_V1_STR)
 
+# Also expose without prefix so both /verify and /api/v1/verify work interchangeably
+app.include_router(verify.router)
+app.include_router(knowledge.router)
+app.include_router(analytics.router)
+
 @app.get("/")
 def read_root():
     return {
