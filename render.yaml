@@ -15,6 +15,12 @@ services:
         value: healthcare_verifier_db
       - key: MONGODB_URL
         value: mongodb+srv://demo:demo@cluster.mongodb.net/healthcare_verifier_db
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: MKL_NUM_THREADS
+        value: "1"
+      - key: TOKENIZERS_PARALLELISM
+        value: "false"
 
   # 2. Frontend Web Service (React Static Site)
   - type: web

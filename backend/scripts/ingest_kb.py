@@ -91,9 +91,12 @@ def run_ingestion():
     print(f"Connecting to ChromaDB at: {chroma_dir}")
     client = chromadb.PersistentClient(path=chroma_dir)
     
-    embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    try:
+        embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+    except Exception:
+        embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        )
     
     collection = client.get_or_create_collection(
         name="healthcare_knowledge_base",

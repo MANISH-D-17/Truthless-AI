@@ -29,10 +29,6 @@ async def startup_event():
         await connect_to_mongo()
     except Exception as e:
         print(f"MongoDB connection notice: {e}")
-    try:
-        vector_store.initialize()
-    except Exception as e:
-        print(f"Vector Store initialization notice: {e}")
 
 @app.on_event("shutdown")
 async def shutdown_event():

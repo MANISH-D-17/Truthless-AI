@@ -25,9 +25,12 @@ class HealthcareVectorStore:
             os.makedirs(settings.CHROMADB_DIR, exist_ok=True)
             self.chroma_client = chromadb.PersistentClient(path=settings.CHROMADB_DIR)
             
-            self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-                model_name=settings.EMBEDDING_MODEL_NAME
-            )
+            try:
+                self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+            except Exception:
+                self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
+                    model_name=settings.EMBEDDING_MODEL_NAME
+                )
             
             self.collection = self.chroma_client.get_or_create_collection(
                 name="healthcare_knowledge_base",
