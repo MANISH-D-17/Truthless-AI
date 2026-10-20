@@ -3,7 +3,7 @@ services:
   - type: web
     name: healthcare-verifier-backend
     env: python
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: pip install -r requirements.txt && python scripts/ingest_kb.py
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     rootDir: backend
     envVars:

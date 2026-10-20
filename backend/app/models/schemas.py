@@ -1,17 +1,17 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
 # --- Authentication Schemas ---
 class UserCreate(BaseModel):
-    email: EmailStr
+    email: str
     username: str
     password: str
     role: Optional[str] = "researcher"
 
 class UserResponse(BaseModel):
     id: str
-    email: EmailStr
+    email: str
     username: str
     role: str
     created_at: datetime
